@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #14171f;
+  --color-ink-soft: #1d212c;
+  --color-paper: #f7f5ef;
+  --color-paper-dim: #efece2;
+  --color-marigold: #f5a623;
+  --color-marigold-soft: #ffc966;
+  --color-coral: #ff6452;
+  --color-teal: #1c8a6e;
+  --color-teal-soft: #2ba686;
+  --color-slate: #8b8fa3;
+  --color-line: #2a2e3a;
+  --color-line-light: #e2ddcf;
+
+  --font-display: "Anton", "Arial Narrow", sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--color-marigold);
+  color: var(--color-ink);
+}
+
+.ticket-perforation {
+  position: relative;
+  border-top: 2px dashed var(--color-line-light);
+}
+.ticket-perforation::before,
+.ticket-perforation::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background: var(--color-ink);
+}
+.ticket-perforation::before {
+  left: -10px;
+}
+.ticket-perforation::after {
+  right: -10px;
+}
+
+.ticket-perforation-light::before,
+.ticket-perforation-light::after {
+  background: var(--color-paper);
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee-scroll 32s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-marigold);
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--color-ink); }
+::-webkit-scrollbar-thumb { background: var(--color-line); border-radius: 9999px; }
+
+.input {
+  background: var(--color-ink-soft);
+  border: 1px solid var(--color-line);
+  border-radius: 0.75rem;
+  padding: 0.65rem 1rem;
+  color: var(--color-paper);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.input::placeholder {
+  color: color-mix(in srgb, var(--color-paper) 35%, transparent);
+}
+.input:focus {
+  border-color: var(--color-marigold);
+}
